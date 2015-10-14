@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuwill.simpleMyBatis.dao.CommonPostModelMapper">
+  <resultMap id="BaseResultMap" type="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    <id column="POST_ID" jdbcType="INTEGER" property="postId" />
+    <result column="POST_AUTHOR" jdbcType="INTEGER" property="postAuthor" />
+    <result column="POST_DATE" jdbcType="TIMESTAMP" property="postDate" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="POST_STATUS" jdbcType="VARCHAR" property="postStatus" />
+    <result column="COMMENT_STATUS" jdbcType="VARCHAR" property="commentStatus" />
+    <result column="POST_MODIFIED" jdbcType="TIMESTAMP" property="postModified" />
+    <result column="GUID" jdbcType="VARCHAR" property="guid" />
+    <result column="POST_TYPE" jdbcType="VARCHAR" property="postType" />
+    <result column="POST_MIME_TYPE" jdbcType="VARCHAR" property="postMimeType" />
+    <result column="POST_PASSWORD" jdbcType="VARCHAR" property="postPassword" />
+    <result column="POST_NAME" jdbcType="VARCHAR" property="postName" />
+    <result column="POST_PARENT" jdbcType="INTEGER" property="postParent" />
+    <result column="COMMENT_COUNT" jdbcType="INTEGER" property="commentCount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    <result column="CONTENT" jdbcType="CLOB" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    POST_ID, POST_AUTHOR, POST_DATE, TITLE, POST_STATUS, COMMENT_STATUS, POST_MODIFIED, 
+    GUID, POST_TYPE, POST_MIME_TYPE, POST_PASSWORD, POST_NAME, POST_PARENT, COMMENT_COUNT
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from COMMON_POSTS
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from COMMON_POSTS
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    insert into COMMON_POSTS (POST_ID, POST_AUTHOR, POST_DATE, 
+      TITLE, POST_STATUS, COMMENT_STATUS, 
+      POST_MODIFIED, GUID, POST_TYPE, 
+      POST_MIME_TYPE, POST_PASSWORD, POST_NAME, 
+      POST_PARENT, COMMENT_COUNT, CONTENT
+      )
+    values (#{postId,jdbcType=INTEGER}, #{postAuthor,jdbcType=INTEGER}, #{postDate,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=VARCHAR}, #{postStatus,jdbcType=VARCHAR}, #{commentStatus,jdbcType=VARCHAR}, 
+      #{postModified,jdbcType=TIMESTAMP}, #{guid,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
+      #{postMimeType,jdbcType=VARCHAR}, #{postPassword,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, 
+      #{postParent,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    insert into COMMON_POSTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        POST_ID,
+      </if>
+      <if test="postAuthor != null">
+        POST_AUTHOR,
+      </if>
+      <if test="postDate != null">
+        POST_DATE,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="postStatus != null">
+        POST_STATUS,
+      </if>
+      <if test="commentStatus != null">
+        COMMENT_STATUS,
+      </if>
+      <if test="postModified != null">
+        POST_MODIFIED,
+      </if>
+      <if test="guid != null">
+        GUID,
+      </if>
+      <if test="postType != null">
+        POST_TYPE,
+      </if>
+      <if test="postMimeType != null">
+        POST_MIME_TYPE,
+      </if>
+      <if test="postPassword != null">
+        POST_PASSWORD,
+      </if>
+      <if test="postName != null">
+        POST_NAME,
+      </if>
+      <if test="postParent != null">
+        POST_PARENT,
+      </if>
+      <if test="commentCount != null">
+        COMMENT_COUNT,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="postAuthor != null">
+        #{postAuthor,jdbcType=INTEGER},
+      </if>
+      <if test="postDate != null">
+        #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="postModified != null">
+        #{postModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postMimeType != null">
+        #{postMimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="postPassword != null">
+        #{postPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="postParent != null">
+        #{postParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    update COMMON_POSTS
+    <set>
+      <if test="postAuthor != null">
+        POST_AUTHOR = #{postAuthor,jdbcType=INTEGER},
+      </if>
+      <if test="postDate != null">
+        POST_DATE = #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="postStatus != null">
+        POST_STATUS = #{postStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentStatus != null">
+        COMMENT_STATUS = #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="postModified != null">
+        POST_MODIFIED = #{postModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guid != null">
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        POST_TYPE = #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postMimeType != null">
+        POST_MIME_TYPE = #{postMimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="postPassword != null">
+        POST_PASSWORD = #{postPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        POST_NAME = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="postParent != null">
+        POST_PARENT = #{postParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=CLOB},
+      </if>
+    </set>
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    update COMMON_POSTS
+    set POST_AUTHOR = #{postAuthor,jdbcType=INTEGER},
+      POST_DATE = #{postDate,jdbcType=TIMESTAMP},
+      TITLE = #{title,jdbcType=VARCHAR},
+      POST_STATUS = #{postStatus,jdbcType=VARCHAR},
+      COMMENT_STATUS = #{commentStatus,jdbcType=VARCHAR},
+      POST_MODIFIED = #{postModified,jdbcType=TIMESTAMP},
+      GUID = #{guid,jdbcType=VARCHAR},
+      POST_TYPE = #{postType,jdbcType=VARCHAR},
+      POST_MIME_TYPE = #{postMimeType,jdbcType=VARCHAR},
+      POST_PASSWORD = #{postPassword,jdbcType=VARCHAR},
+      POST_NAME = #{postName,jdbcType=VARCHAR},
+      POST_PARENT = #{postParent,jdbcType=INTEGER},
+      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=CLOB}
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    update COMMON_POSTS
+    set POST_AUTHOR = #{postAuthor,jdbcType=INTEGER},
+      POST_DATE = #{postDate,jdbcType=TIMESTAMP},
+      TITLE = #{title,jdbcType=VARCHAR},
+      POST_STATUS = #{postStatus,jdbcType=VARCHAR},
+      COMMENT_STATUS = #{commentStatus,jdbcType=VARCHAR},
+      POST_MODIFIED = #{postModified,jdbcType=TIMESTAMP},
+      GUID = #{guid,jdbcType=VARCHAR},
+      POST_TYPE = #{postType,jdbcType=VARCHAR},
+      POST_MIME_TYPE = #{postMimeType,jdbcType=VARCHAR},
+      POST_PASSWORD = #{postPassword,jdbcType=VARCHAR},
+      POST_NAME = #{postName,jdbcType=VARCHAR},
+      POST_PARENT = #{postParent,jdbcType=INTEGER},
+      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER}
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    <id column="POST_ID" jdbcType="INTEGER" property="postId" />
+    <result column="POST_AUTHOR" jdbcType="INTEGER" property="postAuthor" />
+    <result column="POST_DATE" jdbcType="TIMESTAMP" property="postDate" />
+    <result column="TITLE" jdbcType="VARCHAR" property="title" />
+    <result column="POST_STATUS" jdbcType="VARCHAR" property="postStatus" />
+    <result column="COMMENT_STATUS" jdbcType="VARCHAR" property="commentStatus" />
+    <result column="POST_MODIFIED" jdbcType="TIMESTAMP" property="postModified" />
+    <result column="GUID" jdbcType="VARCHAR" property="guid" />
+    <result column="POST_TYPE" jdbcType="VARCHAR" property="postType" />
+    <result column="POST_MIME_TYPE" jdbcType="VARCHAR" property="postMimeType" />
+    <result column="POST_PASSWORD" jdbcType="VARCHAR" property="postPassword" />
+    <result column="POST_NAME" jdbcType="VARCHAR" property="postName" />
+    <result column="POST_PARENT" jdbcType="INTEGER" property="postParent" />
+    <result column="COMMENT_COUNT" jdbcType="INTEGER" property="commentCount" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    <result column="CONTENT" jdbcType="CLOB" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    POST_ID, POST_AUTHOR, POST_DATE, TITLE, POST_STATUS, COMMENT_STATUS, POST_MODIFIED, 
+    GUID, POST_TYPE, POST_MIME_TYPE, POST_PASSWORD, POST_NAME, POST_PARENT, COMMENT_COUNT
+  </sql>
+  <sql id="Blob_Column_List">
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from COMMON_POSTS
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from COMMON_POSTS
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    insert into COMMON_POSTS (POST_ID, POST_AUTHOR, POST_DATE, 
+      TITLE, POST_STATUS, COMMENT_STATUS, 
+      POST_MODIFIED, GUID, POST_TYPE, 
+      POST_MIME_TYPE, POST_PASSWORD, POST_NAME, 
+      POST_PARENT, COMMENT_COUNT, CONTENT
+      )
+    values (#{postId,jdbcType=INTEGER}, #{postAuthor,jdbcType=INTEGER}, #{postDate,jdbcType=TIMESTAMP}, 
+      #{title,jdbcType=VARCHAR}, #{postStatus,jdbcType=VARCHAR}, #{commentStatus,jdbcType=VARCHAR}, 
+      #{postModified,jdbcType=TIMESTAMP}, #{guid,jdbcType=VARCHAR}, #{postType,jdbcType=VARCHAR}, 
+      #{postMimeType,jdbcType=VARCHAR}, #{postPassword,jdbcType=VARCHAR}, #{postName,jdbcType=VARCHAR}, 
+      #{postParent,jdbcType=INTEGER}, #{commentCount,jdbcType=INTEGER}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    insert into COMMON_POSTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        POST_ID,
+      </if>
+      <if test="postAuthor != null">
+        POST_AUTHOR,
+      </if>
+      <if test="postDate != null">
+        POST_DATE,
+      </if>
+      <if test="title != null">
+        TITLE,
+      </if>
+      <if test="postStatus != null">
+        POST_STATUS,
+      </if>
+      <if test="commentStatus != null">
+        COMMENT_STATUS,
+      </if>
+      <if test="postModified != null">
+        POST_MODIFIED,
+      </if>
+      <if test="guid != null">
+        GUID,
+      </if>
+      <if test="postType != null">
+        POST_TYPE,
+      </if>
+      <if test="postMimeType != null">
+        POST_MIME_TYPE,
+      </if>
+      <if test="postPassword != null">
+        POST_PASSWORD,
+      </if>
+      <if test="postName != null">
+        POST_NAME,
+      </if>
+      <if test="postParent != null">
+        POST_PARENT,
+      </if>
+      <if test="commentCount != null">
+        COMMENT_COUNT,
+      </if>
+      <if test="content != null">
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="postAuthor != null">
+        #{postAuthor,jdbcType=INTEGER},
+      </if>
+      <if test="postDate != null">
+        #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="postStatus != null">
+        #{postStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="postModified != null">
+        #{postModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postMimeType != null">
+        #{postMimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="postPassword != null">
+        #{postPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="postParent != null">
+        #{postParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    update COMMON_POSTS
+    <set>
+      <if test="postAuthor != null">
+        POST_AUTHOR = #{postAuthor,jdbcType=INTEGER},
+      </if>
+      <if test="postDate != null">
+        POST_DATE = #{postDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="title != null">
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="postStatus != null">
+        POST_STATUS = #{postStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="commentStatus != null">
+        COMMENT_STATUS = #{commentStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="postModified != null">
+        POST_MODIFIED = #{postModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="guid != null">
+        GUID = #{guid,jdbcType=VARCHAR},
+      </if>
+      <if test="postType != null">
+        POST_TYPE = #{postType,jdbcType=VARCHAR},
+      </if>
+      <if test="postMimeType != null">
+        POST_MIME_TYPE = #{postMimeType,jdbcType=VARCHAR},
+      </if>
+      <if test="postPassword != null">
+        POST_PASSWORD = #{postPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="postName != null">
+        POST_NAME = #{postName,jdbcType=VARCHAR},
+      </if>
+      <if test="postParent != null">
+        POST_PARENT = #{postParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentCount != null">
+        COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        CONTENT = #{content,jdbcType=CLOB},
+      </if>
+    </set>
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    update COMMON_POSTS
+    set POST_AUTHOR = #{postAuthor,jdbcType=INTEGER},
+      POST_DATE = #{postDate,jdbcType=TIMESTAMP},
+      TITLE = #{title,jdbcType=VARCHAR},
+      POST_STATUS = #{postStatus,jdbcType=VARCHAR},
+      COMMENT_STATUS = #{commentStatus,jdbcType=VARCHAR},
+      POST_MODIFIED = #{postModified,jdbcType=TIMESTAMP},
+      GUID = #{guid,jdbcType=VARCHAR},
+      POST_TYPE = #{postType,jdbcType=VARCHAR},
+      POST_MIME_TYPE = #{postMimeType,jdbcType=VARCHAR},
+      POST_PASSWORD = #{postPassword,jdbcType=VARCHAR},
+      POST_NAME = #{postName,jdbcType=VARCHAR},
+      POST_PARENT = #{postParent,jdbcType=INTEGER},
+      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER},
+      CONTENT = #{content,jdbcType=CLOB}
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuwill.simpleMyBatis.entity.CommonPostModel">
+    update COMMON_POSTS
+    set POST_AUTHOR = #{postAuthor,jdbcType=INTEGER},
+      POST_DATE = #{postDate,jdbcType=TIMESTAMP},
+      TITLE = #{title,jdbcType=VARCHAR},
+      POST_STATUS = #{postStatus,jdbcType=VARCHAR},
+      COMMENT_STATUS = #{commentStatus,jdbcType=VARCHAR},
+      POST_MODIFIED = #{postModified,jdbcType=TIMESTAMP},
+      GUID = #{guid,jdbcType=VARCHAR},
+      POST_TYPE = #{postType,jdbcType=VARCHAR},
+      POST_MIME_TYPE = #{postMimeType,jdbcType=VARCHAR},
+      POST_PASSWORD = #{postPassword,jdbcType=VARCHAR},
+      POST_NAME = #{postName,jdbcType=VARCHAR},
+      POST_PARENT = #{postParent,jdbcType=INTEGER},
+      COMMENT_COUNT = #{commentCount,jdbcType=INTEGER}
+    where POST_ID = #{postId,jdbcType=INTEGER}
+  </update>
+</mapper>

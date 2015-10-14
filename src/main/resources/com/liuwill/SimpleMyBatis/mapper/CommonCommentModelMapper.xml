@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuwill.simpleMyBatis.dao.CommonCommentModelMapper">
+  <resultMap id="BaseResultMap" type="com.liuwill.simpleMyBatis.entity.CommonCommentModel">
+    <id column="COMMENT_ID" jdbcType="INTEGER" property="commentId" />
+    <result column="POST_ID" jdbcType="INTEGER" property="postId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="COMMENT_AUTHOR_EMAIL" jdbcType="VARCHAR" property="commentAuthorEmail" />
+    <result column="COMMENT_AUTHOR_URL" jdbcType="VARCHAR" property="commentAuthorUrl" />
+    <result column="COMMENT_AUTHOR_IP" jdbcType="VARCHAR" property="commentAuthorIp" />
+    <result column="COMMENT_DATE" jdbcType="TIMESTAMP" property="commentDate" />
+    <result column="COMMENT_TYPE" jdbcType="VARCHAR" property="commentType" />
+    <result column="COMMENT_PARENT" jdbcType="INTEGER" property="commentParent" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    <result column="COMMENT_AUTHOR" jdbcType="CLOB" property="commentAuthor" />
+    <result column="COMMENT_CONTENT" jdbcType="CLOB" property="commentContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COMMENT_ID, POST_ID, USER_ID, COMMENT_AUTHOR_EMAIL, COMMENT_AUTHOR_URL, COMMENT_AUTHOR_IP, 
+    COMMENT_DATE, COMMENT_TYPE, COMMENT_PARENT
+  </sql>
+  <sql id="Blob_Column_List">
+    COMMENT_AUTHOR, COMMENT_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from COMMON_COMMENTS
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from COMMON_COMMENTS
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    insert into COMMON_COMMENTS (COMMENT_ID, POST_ID, USER_ID, 
+      COMMENT_AUTHOR_EMAIL, COMMENT_AUTHOR_URL, COMMENT_AUTHOR_IP, 
+      COMMENT_DATE, COMMENT_TYPE, COMMENT_PARENT, 
+      COMMENT_AUTHOR, COMMENT_CONTENT)
+    values (#{commentId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{commentAuthorEmail,jdbcType=VARCHAR}, #{commentAuthorUrl,jdbcType=VARCHAR}, #{commentAuthorIp,jdbcType=VARCHAR}, 
+      #{commentDate,jdbcType=TIMESTAMP}, #{commentType,jdbcType=VARCHAR}, #{commentParent,jdbcType=INTEGER}, 
+      #{commentAuthor,jdbcType=CLOB}, #{commentContent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    insert into COMMON_COMMENTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        COMMENT_ID,
+      </if>
+      <if test="postId != null">
+        POST_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="commentAuthorEmail != null">
+        COMMENT_AUTHOR_EMAIL,
+      </if>
+      <if test="commentAuthorUrl != null">
+        COMMENT_AUTHOR_URL,
+      </if>
+      <if test="commentAuthorIp != null">
+        COMMENT_AUTHOR_IP,
+      </if>
+      <if test="commentDate != null">
+        COMMENT_DATE,
+      </if>
+      <if test="commentType != null">
+        COMMENT_TYPE,
+      </if>
+      <if test="commentParent != null">
+        COMMENT_PARENT,
+      </if>
+      <if test="commentAuthor != null">
+        COMMENT_AUTHOR,
+      </if>
+      <if test="commentContent != null">
+        COMMENT_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthorEmail != null">
+        #{commentAuthorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorUrl != null">
+        #{commentAuthorUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorIp != null">
+        #{commentAuthorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentType != null">
+        #{commentType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentParent != null">
+        #{commentParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthor != null">
+        #{commentAuthor,jdbcType=CLOB},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    update COMMON_COMMENTS
+    <set>
+      <if test="postId != null">
+        POST_ID = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthorEmail != null">
+        COMMENT_AUTHOR_EMAIL = #{commentAuthorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorUrl != null">
+        COMMENT_AUTHOR_URL = #{commentAuthorUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorIp != null">
+        COMMENT_AUTHOR_IP = #{commentAuthorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentType != null">
+        COMMENT_TYPE = #{commentType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentParent != null">
+        COMMENT_PARENT = #{commentParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthor != null">
+        COMMENT_AUTHOR = #{commentAuthor,jdbcType=CLOB},
+      </if>
+      <if test="commentContent != null">
+        COMMENT_CONTENT = #{commentContent,jdbcType=CLOB},
+      </if>
+    </set>
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    update COMMON_COMMENTS
+    set POST_ID = #{postId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      COMMENT_AUTHOR_EMAIL = #{commentAuthorEmail,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_URL = #{commentAuthorUrl,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_IP = #{commentAuthorIp,jdbcType=VARCHAR},
+      COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      COMMENT_TYPE = #{commentType,jdbcType=VARCHAR},
+      COMMENT_PARENT = #{commentParent,jdbcType=INTEGER},
+      COMMENT_AUTHOR = #{commentAuthor,jdbcType=CLOB},
+      COMMENT_CONTENT = #{commentContent,jdbcType=CLOB}
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModel">
+    update COMMON_COMMENTS
+    set POST_ID = #{postId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      COMMENT_AUTHOR_EMAIL = #{commentAuthorEmail,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_URL = #{commentAuthorUrl,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_IP = #{commentAuthorIp,jdbcType=VARCHAR},
+      COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      COMMENT_TYPE = #{commentType,jdbcType=VARCHAR},
+      COMMENT_PARENT = #{commentParent,jdbcType=INTEGER}
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.liuwill.simpleMyBatis.entity.CommonCommentModel">
+    <id column="COMMENT_ID" jdbcType="INTEGER" property="commentId" />
+    <result column="POST_ID" jdbcType="INTEGER" property="postId" />
+    <result column="USER_ID" jdbcType="INTEGER" property="userId" />
+    <result column="COMMENT_AUTHOR_EMAIL" jdbcType="VARCHAR" property="commentAuthorEmail" />
+    <result column="COMMENT_AUTHOR_URL" jdbcType="VARCHAR" property="commentAuthorUrl" />
+    <result column="COMMENT_AUTHOR_IP" jdbcType="VARCHAR" property="commentAuthorIp" />
+    <result column="COMMENT_DATE" jdbcType="TIMESTAMP" property="commentDate" />
+    <result column="COMMENT_TYPE" jdbcType="VARCHAR" property="commentType" />
+    <result column="COMMENT_PARENT" jdbcType="INTEGER" property="commentParent" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    <result column="COMMENT_AUTHOR" jdbcType="CLOB" property="commentAuthor" />
+    <result column="COMMENT_CONTENT" jdbcType="CLOB" property="commentContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    COMMENT_ID, POST_ID, USER_ID, COMMENT_AUTHOR_EMAIL, COMMENT_AUTHOR_URL, COMMENT_AUTHOR_IP, 
+    COMMENT_DATE, COMMENT_TYPE, COMMENT_PARENT
+  </sql>
+  <sql id="Blob_Column_List">
+    COMMENT_AUTHOR, COMMENT_CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from COMMON_COMMENTS
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from COMMON_COMMENTS
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    insert into COMMON_COMMENTS (COMMENT_ID, POST_ID, USER_ID, 
+      COMMENT_AUTHOR_EMAIL, COMMENT_AUTHOR_URL, COMMENT_AUTHOR_IP, 
+      COMMENT_DATE, COMMENT_TYPE, COMMENT_PARENT, 
+      COMMENT_AUTHOR, COMMENT_CONTENT)
+    values (#{commentId,jdbcType=INTEGER}, #{postId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{commentAuthorEmail,jdbcType=VARCHAR}, #{commentAuthorUrl,jdbcType=VARCHAR}, #{commentAuthorIp,jdbcType=VARCHAR}, 
+      #{commentDate,jdbcType=TIMESTAMP}, #{commentType,jdbcType=VARCHAR}, #{commentParent,jdbcType=INTEGER}, 
+      #{commentAuthor,jdbcType=CLOB}, #{commentContent,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    insert into COMMON_COMMENTS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        COMMENT_ID,
+      </if>
+      <if test="postId != null">
+        POST_ID,
+      </if>
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="commentAuthorEmail != null">
+        COMMENT_AUTHOR_EMAIL,
+      </if>
+      <if test="commentAuthorUrl != null">
+        COMMENT_AUTHOR_URL,
+      </if>
+      <if test="commentAuthorIp != null">
+        COMMENT_AUTHOR_IP,
+      </if>
+      <if test="commentDate != null">
+        COMMENT_DATE,
+      </if>
+      <if test="commentType != null">
+        COMMENT_TYPE,
+      </if>
+      <if test="commentParent != null">
+        COMMENT_PARENT,
+      </if>
+      <if test="commentAuthor != null">
+        COMMENT_AUTHOR,
+      </if>
+      <if test="commentContent != null">
+        COMMENT_CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=INTEGER},
+      </if>
+      <if test="postId != null">
+        #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthorEmail != null">
+        #{commentAuthorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorUrl != null">
+        #{commentAuthorUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorIp != null">
+        #{commentAuthorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentType != null">
+        #{commentType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentParent != null">
+        #{commentParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthor != null">
+        #{commentAuthor,jdbcType=CLOB},
+      </if>
+      <if test="commentContent != null">
+        #{commentContent,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    update COMMON_COMMENTS
+    <set>
+      <if test="postId != null">
+        POST_ID = #{postId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        USER_ID = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthorEmail != null">
+        COMMENT_AUTHOR_EMAIL = #{commentAuthorEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorUrl != null">
+        COMMENT_AUTHOR_URL = #{commentAuthorUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="commentAuthorIp != null">
+        COMMENT_AUTHOR_IP = #{commentAuthorIp,jdbcType=VARCHAR},
+      </if>
+      <if test="commentDate != null">
+        COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentType != null">
+        COMMENT_TYPE = #{commentType,jdbcType=VARCHAR},
+      </if>
+      <if test="commentParent != null">
+        COMMENT_PARENT = #{commentParent,jdbcType=INTEGER},
+      </if>
+      <if test="commentAuthor != null">
+        COMMENT_AUTHOR = #{commentAuthor,jdbcType=CLOB},
+      </if>
+      <if test="commentContent != null">
+        COMMENT_CONTENT = #{commentContent,jdbcType=CLOB},
+      </if>
+    </set>
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModelWithBLOBs">
+    update COMMON_COMMENTS
+    set POST_ID = #{postId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      COMMENT_AUTHOR_EMAIL = #{commentAuthorEmail,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_URL = #{commentAuthorUrl,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_IP = #{commentAuthorIp,jdbcType=VARCHAR},
+      COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      COMMENT_TYPE = #{commentType,jdbcType=VARCHAR},
+      COMMENT_PARENT = #{commentParent,jdbcType=INTEGER},
+      COMMENT_AUTHOR = #{commentAuthor,jdbcType=CLOB},
+      COMMENT_CONTENT = #{commentContent,jdbcType=CLOB}
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuwill.simpleMyBatis.entity.CommonCommentModel">
+    update COMMON_COMMENTS
+    set POST_ID = #{postId,jdbcType=INTEGER},
+      USER_ID = #{userId,jdbcType=INTEGER},
+      COMMENT_AUTHOR_EMAIL = #{commentAuthorEmail,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_URL = #{commentAuthorUrl,jdbcType=VARCHAR},
+      COMMENT_AUTHOR_IP = #{commentAuthorIp,jdbcType=VARCHAR},
+      COMMENT_DATE = #{commentDate,jdbcType=TIMESTAMP},
+      COMMENT_TYPE = #{commentType,jdbcType=VARCHAR},
+      COMMENT_PARENT = #{commentParent,jdbcType=INTEGER}
+    where COMMENT_ID = #{commentId,jdbcType=INTEGER}
+  </update>
+</mapper>

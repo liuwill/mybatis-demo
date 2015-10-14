@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liuwill.simpleMyBatis.dao.CommonUserModelMapper">
+  <resultMap id="BaseResultMap" type="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    <id column="UID" jdbcType="INTEGER" property="uid" />
+    <result column="ADDR" jdbcType="VARCHAR" property="addr" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="DISPLAY_NAME" jdbcType="VARCHAR" property="displayName" />
+    <result column="USER_LOGIN" jdbcType="VARCHAR" property="userLogin" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ACCOUNT_BALANCE" jdbcType="DECIMAL" property="accountBalance" />
+    <result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+    <result column="IS_AVATAR" jdbcType="TINYINT" property="isAvatar" />
+    <result column="LEVEL" jdbcType="TINYINT" property="level" />
+    <result column="STATUS" jdbcType="TINYINT" property="status" />
+    <result column="REG_TIME" jdbcType="TIMESTAMP" property="regTime" />
+    <result column="REG_IP" jdbcType="VARCHAR" property="regIp" />
+    <result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UID, ADDR, MOBILE, USERNAME, DISPLAY_NAME, USER_LOGIN, PASSWORD, EMAIL, ACCOUNT_BALANCE, 
+    USER_TYPE, IS_AVATAR, LEVEL, STATUS, REG_TIME, REG_IP, LAST_LOGIN_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from COMMON_USER
+    where UID = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from COMMON_USER
+    where UID = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    insert into COMMON_USER (UID, ADDR, MOBILE, 
+      USERNAME, DISPLAY_NAME, USER_LOGIN, 
+      PASSWORD, EMAIL, ACCOUNT_BALANCE, 
+      USER_TYPE, IS_AVATAR, LEVEL, 
+      STATUS, REG_TIME, REG_IP, 
+      LAST_LOGIN_TIME)
+    values (#{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, #{userLogin,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{accountBalance,jdbcType=DECIMAL}, 
+      #{userType,jdbcType=VARCHAR}, #{isAvatar,jdbcType=TINYINT}, #{level,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{regTime,jdbcType=TIMESTAMP}, #{regIp,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    insert into COMMON_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        UID,
+      </if>
+      <if test="addr != null">
+        ADDR,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="displayName != null">
+        DISPLAY_NAME,
+      </if>
+      <if test="userLogin != null">
+        USER_LOGIN,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="accountBalance != null">
+        ACCOUNT_BALANCE,
+      </if>
+      <if test="userType != null">
+        USER_TYPE,
+      </if>
+      <if test="isAvatar != null">
+        IS_AVATAR,
+      </if>
+      <if test="level != null">
+        LEVEL,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="regTime != null">
+        REG_TIME,
+      </if>
+      <if test="regIp != null">
+        REG_IP,
+      </if>
+      <if test="lastLoginTime != null">
+        LAST_LOGIN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null">
+        #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        #{accountBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvatar != null">
+        #{isAvatar,jdbcType=TINYINT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="regTime != null">
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regIp != null">
+        #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    update COMMON_USER
+    <set>
+      <if test="addr != null">
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        DISPLAY_NAME = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null">
+        USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        ACCOUNT_BALANCE = #{accountBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null">
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvatar != null">
+        IS_AVATAR = #{isAvatar,jdbcType=TINYINT},
+      </if>
+      <if test="level != null">
+        LEVEL = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="regTime != null">
+        REG_TIME = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regIp != null">
+        REG_IP = #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UID = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    update COMMON_USER
+    set ADDR = #{addr,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      DISPLAY_NAME = #{displayName,jdbcType=VARCHAR},
+      USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ACCOUNT_BALANCE = #{accountBalance,jdbcType=DECIMAL},
+      USER_TYPE = #{userType,jdbcType=VARCHAR},
+      IS_AVATAR = #{isAvatar,jdbcType=TINYINT},
+      LEVEL = #{level,jdbcType=TINYINT},
+      STATUS = #{status,jdbcType=TINYINT},
+      REG_TIME = #{regTime,jdbcType=TIMESTAMP},
+      REG_IP = #{regIp,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where UID = #{uid,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    <id column="UID" jdbcType="INTEGER" property="uid" />
+    <result column="ADDR" jdbcType="VARCHAR" property="addr" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="DISPLAY_NAME" jdbcType="VARCHAR" property="displayName" />
+    <result column="USER_LOGIN" jdbcType="VARCHAR" property="userLogin" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ACCOUNT_BALANCE" jdbcType="DECIMAL" property="accountBalance" />
+    <result column="USER_TYPE" jdbcType="VARCHAR" property="userType" />
+    <result column="IS_AVATAR" jdbcType="TINYINT" property="isAvatar" />
+    <result column="LEVEL" jdbcType="TINYINT" property="level" />
+    <result column="STATUS" jdbcType="TINYINT" property="status" />
+    <result column="REG_TIME" jdbcType="TIMESTAMP" property="regTime" />
+    <result column="REG_IP" jdbcType="VARCHAR" property="regIp" />
+    <result column="LAST_LOGIN_TIME" jdbcType="TIMESTAMP" property="lastLoginTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UID, ADDR, MOBILE, USERNAME, DISPLAY_NAME, USER_LOGIN, PASSWORD, EMAIL, ACCOUNT_BALANCE, 
+    USER_TYPE, IS_AVATAR, LEVEL, STATUS, REG_TIME, REG_IP, LAST_LOGIN_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from COMMON_USER
+    where UID = #{uid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from COMMON_USER
+    where UID = #{uid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    insert into COMMON_USER (UID, ADDR, MOBILE, 
+      USERNAME, DISPLAY_NAME, USER_LOGIN, 
+      PASSWORD, EMAIL, ACCOUNT_BALANCE, 
+      USER_TYPE, IS_AVATAR, LEVEL, 
+      STATUS, REG_TIME, REG_IP, 
+      LAST_LOGIN_TIME)
+    values (#{uid,jdbcType=INTEGER}, #{addr,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{username,jdbcType=VARCHAR}, #{displayName,jdbcType=VARCHAR}, #{userLogin,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{accountBalance,jdbcType=DECIMAL}, 
+      #{userType,jdbcType=VARCHAR}, #{isAvatar,jdbcType=TINYINT}, #{level,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{regTime,jdbcType=TIMESTAMP}, #{regIp,jdbcType=VARCHAR}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    insert into COMMON_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        UID,
+      </if>
+      <if test="addr != null">
+        ADDR,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="displayName != null">
+        DISPLAY_NAME,
+      </if>
+      <if test="userLogin != null">
+        USER_LOGIN,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="accountBalance != null">
+        ACCOUNT_BALANCE,
+      </if>
+      <if test="userType != null">
+        USER_TYPE,
+      </if>
+      <if test="isAvatar != null">
+        IS_AVATAR,
+      </if>
+      <if test="level != null">
+        LEVEL,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="regTime != null">
+        REG_TIME,
+      </if>
+      <if test="regIp != null">
+        REG_IP,
+      </if>
+      <if test="lastLoginTime != null">
+        LAST_LOGIN_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="uid != null">
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="addr != null">
+        #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null">
+        #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        #{accountBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvatar != null">
+        #{isAvatar,jdbcType=TINYINT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="regTime != null">
+        #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regIp != null">
+        #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    update COMMON_USER
+    <set>
+      <if test="addr != null">
+        ADDR = #{addr,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null">
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="displayName != null">
+        DISPLAY_NAME = #{displayName,jdbcType=VARCHAR},
+      </if>
+      <if test="userLogin != null">
+        USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="accountBalance != null">
+        ACCOUNT_BALANCE = #{accountBalance,jdbcType=DECIMAL},
+      </if>
+      <if test="userType != null">
+        USER_TYPE = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="isAvatar != null">
+        IS_AVATAR = #{isAvatar,jdbcType=TINYINT},
+      </if>
+      <if test="level != null">
+        LEVEL = #{level,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="regTime != null">
+        REG_TIME = #{regTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regIp != null">
+        REG_IP = #{regIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where UID = #{uid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuwill.simpleMyBatis.entity.CommonUserModel">
+    update COMMON_USER
+    set ADDR = #{addr,jdbcType=VARCHAR},
+      MOBILE = #{mobile,jdbcType=VARCHAR},
+      USERNAME = #{username,jdbcType=VARCHAR},
+      DISPLAY_NAME = #{displayName,jdbcType=VARCHAR},
+      USER_LOGIN = #{userLogin,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      ACCOUNT_BALANCE = #{accountBalance,jdbcType=DECIMAL},
+      USER_TYPE = #{userType,jdbcType=VARCHAR},
+      IS_AVATAR = #{isAvatar,jdbcType=TINYINT},
+      LEVEL = #{level,jdbcType=TINYINT},
+      STATUS = #{status,jdbcType=TINYINT},
+      REG_TIME = #{regTime,jdbcType=TIMESTAMP},
+      REG_IP = #{regIp,jdbcType=VARCHAR},
+      LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP}
+    where UID = #{uid,jdbcType=INTEGER}
+  </update>
+</mapper>

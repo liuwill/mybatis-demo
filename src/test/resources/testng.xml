@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="TestAll">
+    <test name="database">
+        <groups>
+            <run>
+                <exclude name="string" />
+                <include name="db" />
+            </run>
+        </groups>
+
+        <classes>
+            <class name="com.liuwill.testng.TestMybatis" />
+        </classes>
+    </test>
+
+    <test name="string">
+        <groups>
+            <run>
+                <exclude name="string" />
+                <include name="db" />
+            </run>
+        </groups>
+
+        <classes>
+            <class name="com.liuwill.testng.TestDemoApi" />
+        </classes>
+    </test>
+</suite>
