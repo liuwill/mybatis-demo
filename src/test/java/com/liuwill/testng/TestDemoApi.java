@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 public class TestDemoApi {
     private DatabaseDemoApi demoApi;
 
-    @BeforeClass
+    @BeforeClass(groups = "db")
     public void setUp(){
         demoApi = new DatabaseDemoApi();
     }
@@ -34,5 +34,14 @@ public class TestDemoApi {
 
         System.out.println(JSON.toJSONString(commonUser));
         Assert.assertEquals(commonUser.getUsername(),name);
+    }
+
+    @Test(groups = "transaction")
+    public void testAddDefault(){
+        String name = "test";
+        int commonUser = demoApi.addDefaultUser();
+
+        System.out.println(JSON.toJSONString(commonUser));
+        Assert.assertEquals(2,2);
     }
 }

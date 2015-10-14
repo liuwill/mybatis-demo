@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class TestMybatis {
 
     private SqlSessionFactory sqlSessionFactory;
 
-    @BeforeClass
+    @BeforeTest(groups = "db")
     public void initDb(){
         System.out.println("MyBatis Test");
 

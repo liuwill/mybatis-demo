@@ -48,7 +48,9 @@ dependencies {
 }
 
 test {
-    useTestNG()
+    useTestNG{
+        suites 'src/test/resources/testng.xml'
+    }
 }
 
 task mybatisGenerate << {

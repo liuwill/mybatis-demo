@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestAll">
-    <test name="database">
+    <test name="TestMybatis" enabled="true">
         <groups>
             <run>
-                <exclude name="string" />
+                <include name="string" />
                 <include name="db" />
             </run>
         </groups>
@@ -13,11 +13,12 @@
         </classes>
     </test>
 
-    <test name="string">
+    <test name="TestDemoApi" enabled="true">
         <groups>
             <run>
-                <exclude name="string" />
+                <include name="string" />
                 <include name="db" />
+                <exclude name="transaction" />
             </run>
         </groups>
 
