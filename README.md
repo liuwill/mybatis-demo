@@ -10,6 +10,8 @@
 
 项目用到的mapper类和文件，还有数据模型，是通过mybatisGenerator来生成的，在gradle中进行相应的配置，然后执行就可以。
 
+下载项目之后，运行`gradle idea`生成idea项目
+
 ###### 目录说明
 
 `src/main/java/` - 类路径，程序的主要代码，将会编译成项目的class
